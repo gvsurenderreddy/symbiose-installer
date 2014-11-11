@@ -41,6 +41,7 @@ if [ type npm >/dev/null 2>&1 ] ; then
 else
 	echo "Building..."
 	npm install
+	npm run-script build
 	cd build
 	dest="$dest/build"
 fi
