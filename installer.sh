@@ -7,6 +7,7 @@ dest="symbiose"
 if [ -d "$dest" ] ; then
 	echo "$dest already exists, skipping download"
 else
+	echo "Downloading Symbiose..."
 	if [ type git >/dev/null 2>&1 ] ; then
 		echo "git not found, falling back to zipball"
 		wget "$zipball" -O "$dest.zip"
@@ -40,8 +41,7 @@ if [ type npm >/dev/null 2>&1 ] ; then
 else
 	echo "Building..."
 	npm install
-	npm install grunt-cli
-	node_modules/.bin/grunt build
+	npm run-script build
 	cd build
 	dest="$dest/build"
 fi
