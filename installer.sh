@@ -21,7 +21,7 @@ fi
 
 cd "$dest"
 
-httpdUser=`ps -eo user,args | egrep -v "(root|$USER)" | egrep "(apache|httpd)" | awk 'FNR<2 {print $1}'`
+httpdUser=`ps -eo user,args | egrep -v "(root|$USER)" | egrep "(apache|httpd|nginx)" | awk 'FNR<2 {print $1}'`
 if [ -z "$httpdUser" ] ; then
 	echo >&2 "Could not determine httpd user!"
 	echo >&2 "If you plan to use Symbiose with httpd, please see https://github.com/symbiose/symbiose/wiki/Installing#copying-files-to-the-server"
@@ -49,3 +49,7 @@ fi
 echo ""
 echo "Symbiose successfully installed in $dest"
 echo "To configure it, see https://github.com/symbiose/symbiose/wiki/Installing#configuration"
+
+if [ -x /usr/sbin/nginx ] ; then
+	echo "WARNING: If you're using Nginx, you'll have to update your config: see https://github.com/symbiose/symbiose/blob/master/nginx.conf"
+fi
